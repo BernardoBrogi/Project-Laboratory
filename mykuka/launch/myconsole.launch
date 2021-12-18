@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+	<include file="$(find lwr_simple_example)/launch/console.launch"/>
+	
+
+
+</launch>
