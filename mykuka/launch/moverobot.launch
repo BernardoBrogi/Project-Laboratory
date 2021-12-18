@@ -1,0 +1,6 @@
+
+<launch>
+
+	<include file="$(find lwr_simple_example)/launch/sim.launch"/>
+	
+</launch>
