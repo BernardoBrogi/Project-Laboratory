@@ -32,9 +32,9 @@ $ roslaunch lwr_simple_example console.launch
 This is the console from which we can command the robot.
 All the functionalities of the EPFL package work.
 
-For istance writing the command "go_home" in the console will make the robot move in the home position.
+For instance writing the command "go_home" in the console will make the robot move in the home position.
 
-Hereafter are presented the commands added in order also to exploit the haptic device.
+Hereafter are presented the commands added in order to exploit a haptic device to move the robot and do project tasks.
 The haptic device we worked with is the Omega3. You may need to adjust the path to the libraries of the haptic device.
 
 Running the command
