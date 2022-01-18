@@ -1,0 +1,29 @@
+IMPORTANT COMMANDS
+
+sudo su
+
+route add -net 192.168.0.20 netmask 255.255.255.255 gw 192.168.0.100 dev enp4s0
+
+
+ls -l /dev/bus/usb/00*
+crw-rw-r-- 1 root root 189, 263  1월 10 15:42 008 <-- this is your device
+sudo chmod o+w /dev/bus/usb/003/008
+
+
+
+cd catkin_ws/lwr_gbz
+source devel/setup.bash
+roslaunch lwr_simple_example real.launch
+roslaunch lwr_fri lwr_fri_console.launch
+roslaunch lwr_simple_example console.launch
+roslaunch lwr_simple_example client.launch
+
+roslaunch lwr_simple_example sim.launch
+roslaunch lwr_simple_example console.launch
+roslaunch lwr_simple_example client.launch
+
+
+
+https://github.com/epfl-lasa/kuka-lwr-ros
+
+
