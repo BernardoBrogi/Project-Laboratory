@@ -6,7 +6,7 @@
 This package is an improved version of the [KUKA LWR EPFL package robot lasa](https://github.com/epfl-lasa/kuka-lwr-ros).
 All the bugs contained in that package are solved, and we also added other funtionalities to the package.
 
-The actual funtionalities of our package are the following:
+The actual funtionalities we implemented in our package are the following:
 
 
 * Move the robot with an Haptic Device
