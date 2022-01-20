@@ -60,7 +60,7 @@ $ ls -l /dev/bus/usb/00*
 ```
 Which will give the list of devices connected to the port. Check which is the port connected to the haptic device.
 
-SUppose this corresponds to your device
+Suppose this corresponds to your device
 ```
 /dev/bus/usb/003
 crw-rw-r-- 1 root root 189, 263  1월 10 15:42 008
