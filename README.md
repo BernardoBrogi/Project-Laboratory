@@ -46,23 +46,29 @@ $ go_home
 ```
 
 in the console will make the robot move in the home position.
-It's always recommended to run this command at the beginning and after every other command in order to avoid singularities and probles related to the Cartesian controller.
+It's always recommended to run this command at the beginning and after every other command in order to avoid singularities and problems related to the Cartesian controller.
 
 ### Move the robot with the Haptic Device and record the trajectory
 
 #### Haptic Device setup
 
 The haptic device we worked with is the Omega3. You may need to adjust the path to the libraries of the haptic device in the CMakelist.txt.
-You may also need to give the permission to the port where the haptic device is inserted.
+You may also need to give the permission to the port where the haptic device is inserted. To do this type in a terminal
 
 ```
-$ TO DO
+$ ls -l /dev/bus/usb/00*
 ```
+Which will give the list of devices connected to the port. Check which is the port connected to the haptic device.
 
+SUppose this corresponds to your device
 ```
-$ TO DO
+/dev/bus/usb/003
+crw-rw-r-- 1 root root 189, 263  1월 10 15:42 008
 ```
-
+Then type this command to give permisssion
+```
+sudo chmod o+w /dev/bus/usb/003/008
+```
 #### Implementation
 
 Start the three files of the simulation and go in the position "go_home".
