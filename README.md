@@ -42,7 +42,7 @@ All the functionalities of the EPFL package work.
 For istance writing the command
 
 ```
-$ go_home
+$ Cmd> go_home
 ```
 
 in the console will make the robot move in the home position.
@@ -76,7 +76,7 @@ Start the three files of the simulation and go in the position "go_home".
 Now if you execute the command
 
 ```
-$ Record
+$ Cmd> Record
 ```
 
 you will be able for 10 seconds to control the robot with the haptic device and record the trajectory of the end effector. The data will be saved in the file data.txt.
@@ -85,7 +85,7 @@ The end effector positions are taken 100 times per second.
 Now if you go_home again (you may need to execute the command twice) and execute the command
 
 ```
-$ Replay
+$ Cmd> Replay
 ```
 
 the robot will replay the trajectory recorded.
@@ -111,7 +111,7 @@ will create a new trajectory with the goal given. It will be saved it in the fil
 if you go_home and then write in the console
 
 ```
-$ LfD
+$ Cmd> LfD
 ```
 
 the robot will execute the new trajectory.
