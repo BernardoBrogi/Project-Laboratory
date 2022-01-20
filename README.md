@@ -92,7 +92,7 @@ the robot will replay the trajectory recorded.
 
 ### Exploit the trajectory recorded to LfD and execute another trajectory with the same shape
 
-Supposing there is a trajectory recorded in the file data.txt, to plan and execute a new trajectory run in another terminal
+Here we assume there is a trajectory recorded in the file data.txt. To plan and execute a new trajectory based on the shape of the other run in another terminal
 
 ```
 $ roslaunch dmp dmp.launch
@@ -106,7 +106,7 @@ Running in another terminal
 $ rosrun dmp LfD.py
 ```
 
-will create a new trajectory with the goal given. It will be saved it in the file plan.txt.
+will create a new trajectory based on the other one with the goal given. It will be saved it in the file plan.txt.
 
 if you go_home and then write in the console
 
