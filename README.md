@@ -7,7 +7,7 @@ This package is a modified version of the [KUKA LWR EPFL package robot lasa](htt
 Some compatibility issues of that package are solved, and we also added other funtionalities to the package.
 Moreover, the [DMP package](https://github.com/sniekum/dmp) is added to Learn from Demonstration.
 
-The actual funtionalities we implemented in our package are the following:
+The actual functionalities we implemented in our package are the following:
 
 
 * Move the robot with an Haptic Device
