@@ -70,7 +70,7 @@ Then type this command to give permisssion
 ```
 sudo chmod o+w /dev/bus/usb/003/008
 ```
-#### Implementation
+#### Execution
 
 Start the three files of the simulation and go in the position "go_home".
 
