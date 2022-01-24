@@ -121,4 +121,17 @@ the robot will execute the new trajectory.
 
 TO DO
 
+TO ADD
+
+In order to set the connection with the real robot, follow the instructions for the [Network Setup](https://github.com/epfl-lasa/kuka-lwr-ros/wiki/Network-setup) here. Then type:
+```
+$ sudo su
+```
+insert the password and then run the command:
+```
+$ route add -net 192.168.0.20 netmask 255.255.255.255 gw 192.168.0.100 dev enp4s0
+```
+to add a static route to a single host. 
+If the network results unreachable
+
 
