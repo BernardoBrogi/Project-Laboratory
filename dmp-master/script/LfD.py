@@ -78,6 +78,27 @@ def writeData(fileName, plan, dims):
 					j+= 1
 				f.write("\n")
 				i +=1
+
+def writeData2(fileName, plan, dims): # real robot translations
+	with open(fileName, 'w') as f:
+		i = 0
+		while i < len(plan.plan.points):
+				j = 0
+				while j < 3:
+
+					if j == 0: #x
+						f.write(str(plan.plan.points[i].positions[j] - 0.0159))
+
+					
+
+					elif j == 2 : #z
+						f.write(str(plan.plan.points[i].positions[j] - 0.1898))
+					else:	#y
+						f.write(str(plan.plan.points[i].positions[j]))
+					f.write(" ")
+					j+= 1
+				f.write("\n")
+				i +=1
 			
 
 
@@ -91,7 +112,7 @@ if __name__ == '__main__':
     D = 2.0 * np.sqrt(K)      
     num_bases = 4 
     traj = []
-    traj = readData("/home/hwadong/catkin_ws/src/lwr_gbz/data.txt")
+    traj = readData("/home/hwadong/catkin_ws/src/lwr_gbz/data/data_mes.txt")
     #print data
          
     #traj = [[1.0,1.0, 1.0],[2.0,2.0, 2.0],[3.0,4.0, 5.0],[6.0,8.0, 10.0]]
@@ -104,7 +125,7 @@ if __name__ == '__main__':
     x_0 = [-0.419659, -0.0468611, 0.150443]          #Plan starting at a different point than demo 
     x_dot_0 = [0.0,0.0,0.0]   
     t_0 = 0                
-    goal = [-0.419659, 0.5468611, 0.150443]         #Plan to a different goal than demo
+    goal = [-0.419659, -0.5468611, 0.150443]         #Plan to a different goal than demo
     goal_thresh = [0.2,0.2,0.2]
     seg_length = -1          #Plan until convergence to goal
     tau = 2 * resp.tau       #Desired plan should take twice as long as demo
@@ -113,7 +134,10 @@ if __name__ == '__main__':
     plan = makePlanRequest(x_0, x_dot_0, t_0, goal, goal_thresh, 
                            seg_length, tau, dt, integrate_iter)
     
-    writeData("/home/hwadong/catkin_ws/src/lwr_gbz/plan.txt", plan, dims)
+    writeData("/home/hwadong/catkin_ws/src/lwr_gbz/data/plan.txt", plan, dims)
+
+
+    writeData2("/home/hwadong/catkin_ws/src/lwr_youssef/data/DemonstratedTrajectory_sim_to_real.txt", plan, dims) #for real robot package
 
 
     print plan
