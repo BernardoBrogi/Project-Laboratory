@@ -22,6 +22,8 @@ roslaunch lwr_simple_example sim.launch
 roslaunch lwr_simple_example console.launch
 roslaunch lwr_simple_example client.launch
 
+roslaunch dmp dmp.launch
+rosrun dmp LfD.py
 
 
 https://github.com/epfl-lasa/kuka-lwr-ros
