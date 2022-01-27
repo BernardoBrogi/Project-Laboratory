@@ -1,4 +1,4 @@
-#include "simple_actions/LfD_replay.h"
+#include "simple_actions/LfD_record.h"
 #include "robot_motion_generation/angular_velocity.h"
 #include <tf/transform_broadcaster.h>
 #include "dhdc.h"
@@ -14,7 +14,7 @@ namespace simple_actions {
 
 
 
-    LfD_replay_action::LfD_replay_action(ros::NodeHandle& nh):
+    LfD_record_action::LfD_record_action(ros::NodeHandle& nh):
     Ros_ee_j(nh),
     switch_controller(nh)
 {
@@ -48,7 +48,7 @@ namespace simple_actions {
 
 }
 
-bool LfD_replay_action::update(){
+bool LfD_record_action::update(){
 
     if(!switch_controller.activate_controller("joint_controllers"))
     {
@@ -121,42 +121,120 @@ bool LfD_replay_action::update(){
     bSwitch = true;
     target_id = 0;
     target_id_tmp = target_id;
-;
+
+    //Haptic device initialization
+    //dhdClose();
+    if (dhdOpen() < 0) {
+        printf ("error: cannot open device (%s)\n", dhdErrorGetLastStr());
+        dhdSleep (2.0);
+        return -1;
+    }
+    dhdEnableForce (DHD_ON);
+    double HD_x, HD_y, HD_z;
     double Rob_x, Rob_y, Rob_z;
-
+    double HD_x_init, HD_y_init, HD_z_init;
     double Rob_x_init, Rob_y_init, Rob_z_init;
-
+//    double delta_hd_x, delta_hd_y, delta_hd_z;
+    Eigen::Vector3d delta_hd;
+    Eigen::Vector3d delta_rob;
+    Eigen::Matrix3d Rot;
+    Rot << 1, 0, 0,
+           0, 1, 0,
+           0, 0, 1;
+//    double delta_hd[3];
+//    double delta_rob_x, delta_rob_y, delta_rob_z;
+//    double delta_rob[3];
+//    double Rot[3][3] = {1, 0, 0, 0, 1, 0, 1, 0, 0};
 
     //initial positions
 
     Rob_x_init = current_origin.getX();
     Rob_y_init = current_origin.getY();
     Rob_z_init = current_origin.getZ();
-
-    int index;
-    std::ifstream infile;
-    infile.open("/home/hwadong/catkin_ws/src/lwr_gbz/data/data_comm.txt");
+    dhdGetPosition (&HD_x_init, &HD_y_init, &HD_z_init) ;
 
 
-    while(b_run && ros::ok()) {
+    ros::Time begin = ros::Time::now();
+    std::ofstream outfile;
+//    outfile.open("/home/hwadong/Gio_Bern_Zem/data/data.txt", std::ios::app);
+    outfile.open("/home/hwadong/catkin_ws/src/lwr_gbz/data/data_comm.txt");
+    if( !outfile ) { // file couldn't be opened
+          std::cerr << "Error: file could not be opened" << std::endl;
+          exit(1);
+       }
 
+   std::ofstream outfile2;
+    outfile2.open("/home/hwadong/catkin_ws/src/lwr_gbz/data/data_mes.txt");
+    if( !outfile2 ) { // file couldn't be opened
+          std::cerr << "Error: file could not be opened" << std::endl;
+          exit(1);
+       }
+
+    while(b_run && (ros::Time::now().toSec()-10 < begin.toSec())) {
+//        if(buffer.empty()){
+
+
+//            ee_vel_msg.linear.x  = 0;
+//            ee_vel_msg.linear.y  = 0;
+//            ee_vel_msg.linear.z  = 0;
+//            ee_vel_msg.angular.x = 0;
+//            ee_vel_msg.angular.y = 0;
+//            ee_vel_msg.angular.z = 0;
+//            sendCartVel(ee_vel_msg);
+//            std::cout<<"asdhofhaodsifhdoiashfoiuasdhvoiasdhvoisaduasoidahioduv"<<std::endl;
+//            b_run   = false;
+//            dhdClose ();
+
+
+//            return success;
+//        }
+//        else{
+            dhdGetPosition (&HD_x, &HD_y, &HD_z);
             current_origin = ee_pose_current.getOrigin();
             Rob_x = current_origin.getX();
             Rob_y = current_origin.getY();
             Rob_z = current_origin.getZ();
 
 
-            if(infile.is_open() && infile){
+            outfile2 << Rob_x << " " << Rob_y << " " << Rob_z <<std::endl;
+	
 
-                infile >> Rob_x;
-                infile >> Rob_y;
-                infile >> Rob_z;
-            }
+
+
+            delta_hd(0) = HD_x - HD_x_init;
+            delta_hd(1) = HD_y - HD_y_init;
+            delta_hd(2) = HD_z - HD_z_init;
+            //std::cout<< "Delta hd: "<<delta_hd(0)<<" "<<delta_hd(1)<<" "<<delta_hd(2)<<std::endl;
+
+
+            delta_rob = 7.5*Rot*delta_hd;
+            //std::cout<< "Delta rob: "<<delta_rob(0)<<" "<<delta_rob(1)<<" "<<delta_rob(2)<<std::endl;
+
+//            delta_rob[0] = delta_hd[0];
+//            delta_rob[1] = delta_hd[1];
+//            delta_rob[2] = delta_hd[2];
+
+            Rob_x = Rob_x_init + delta_rob(0);
+            Rob_y = Rob_y_init + delta_rob(1);
+            Rob_z = Rob_z_init + delta_rob(2);
+
+
+            outfile << Rob_x << " " << Rob_y << " " << Rob_z <<std::endl;
+
 
             target_origin.setX(Rob_x);
             target_origin.setY(Rob_y);
             target_origin.setZ(Rob_z);
 
+//            std::cout<< "Time: "<<ros::Time::now() <<std::endl;
+
+
+//            target_origin=buffer.front();
+
+//            dhdGetPosition (&HD_x_s, &HD_y_s, &HD_z_s) ;
+
+
+            std::cout<< "Haptic positions: "<<HD_x<<" "<<HD_y<<" "<< HD_z<<std::endl;
             std::cout<< "Robot positions: "<<Rob_x<<" "<<Rob_y<<" "<< Rob_z<<std::endl;
 
             current_origin = ee_pose_current.getOrigin();
@@ -205,6 +283,11 @@ bool LfD_replay_action::update(){
             ee_vel_msg.angular.x = angular_velocity(0);
             ee_vel_msg.angular.y = angular_velocity(1);
             ee_vel_msg.angular.z = angular_velocity(2);
+            
+           /* if(!ros::ok()){
+                std::cout << "haptic device closed" << std::endl;
+                dhdClose();
+            }*/
                 
 
 
@@ -226,21 +309,25 @@ bool LfD_replay_action::update(){
     }
     
     
-   			ee_vel_msg.linear.x  = 0;
+    		ee_vel_msg.linear.x  = 0;
             ee_vel_msg.linear.y  = 0;
             ee_vel_msg.linear.z  = 0;
             ee_vel_msg.angular.x = 0;
             ee_vel_msg.angular.y = 0;
             ee_vel_msg.angular.z = 0;
             sendCartVel(ee_vel_msg);
-
+            
             b_run   = false;
-
-    
+            outfile.close();
+			outfile2.close();
+            dhdClose ();
 			ROS_INFO("Arrived at target");
+    
+
+
 }
 
-bool LfD_replay_action::stop(){
+bool LfD_record_action::stop(){
     ee_vel_msg.linear.x  = 0;
     ee_vel_msg.linear.y  = 0;
     ee_vel_msg.linear.z  = 0;
@@ -249,10 +336,12 @@ bool LfD_replay_action::stop(){
     ee_vel_msg.angular.z = 0;
     sendCartVel(ee_vel_msg);
     b_run   = false;
+//  dhdClose();
+//  std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" <<std::endl;
     return true;
 }
 
-void LfD_replay_action::simple_line_policy(Eigen::Vector3d& linear_velocity,
+void LfD_record_action::simple_line_policy(Eigen::Vector3d& linear_velocity,
                                             Eigen::Vector3d& angular_velocity,
                                             const tf::Vector3 &current_origin,
                                             const tf::Quaternion &current_orient,
@@ -273,6 +362,13 @@ void LfD_replay_action::simple_line_policy(Eigen::Vector3d& linear_velocity,
      angular_velocity   = motion::d2qw<double>(q,dq);
      dist_target = (current_origin - target_origin).length();
      ROS_INFO_STREAM_THROTTLE(1.0,"distance: " << dist_target);
+
+
+//     if((current_origin - target_origin).length() < 0.005)
+//     {
+//         ROS_INFO_STREAM_THROTTLE(1.0,"next point"<<target_origin);
+//        buffer.pop_front();
+//     }
 
 
 }

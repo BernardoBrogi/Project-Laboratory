@@ -95,7 +95,7 @@ bool LfD_dmp_action::update(){
     Eigen::Vector3d linear_velocity;
     Eigen::Vector3d angular_velocity;
 
-    double control_rate = 100;
+    double control_rate = 500;
     ros::Rate loop_rate(control_rate);
     bool success = true;
 
@@ -229,18 +229,19 @@ bool LfD_dmp_action::update(){
     }
     
     
-    ee_vel_msg.linear.x  = 0;
+   		 	ee_vel_msg.linear.x  = 0;
             ee_vel_msg.linear.y  = 0;
             ee_vel_msg.linear.z  = 0;
             ee_vel_msg.angular.x = 0;
             ee_vel_msg.angular.y = 0;
             ee_vel_msg.angular.z = 0;
             sendCartVel(ee_vel_msg);
-
             b_run   = false;
 
+            ROS_INFO("Arrived at target");
+
     
-    std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" <<std::endl;
+    
 
 }
 
@@ -253,8 +254,6 @@ bool LfD_dmp_action::stop(){
     ee_vel_msg.angular.z = 0;
     sendCartVel(ee_vel_msg);
     b_run   = false;
- 
-    std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" <<std::endl;
     return true;
 }
 

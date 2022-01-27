@@ -5,7 +5,7 @@
 #include "lwr_ros_client/ros_param_parser.h"
 #include "lwr_ros_action/joint_action.h"
 #include "simple_actions/linear_cart_action.h"
-#include "simple_actions/LfD.h"
+#include "simple_actions/LfD_record.h"
 #include "simple_actions/LfD_replay.h"
 #include "simple_actions/LfD_dmp.h"
 
@@ -107,9 +107,9 @@ int main(int argc, char** argv)
     linear_cart_action.first_origin=tf::Vector3(0.3,0.4,0.35);
     actions["linear"]         = &linear_cart_action;
 
-    simple_actions::LfD_action LfD_action(nh);
-    LfD_action.b_position= true;//set true if it is pos,otherwise is velocity.
-    actions["Record"]         = &LfD_action;
+    simple_actions::LfD_record_action LfD_record_action(nh);
+    LfD_record_action.b_position= true;//set true if it is pos,otherwise is velocity.
+    actions["Record"]         = &LfD_record_action;
 
     simple_actions::LfD_replay_action LfD_replay_action(nh);
     LfD_replay_action.b_position= true;//set true if it is pos,otherwise is velocity.
