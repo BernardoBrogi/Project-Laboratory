@@ -1,0 +1,16 @@
+recordMyDesktop = 0.3.8.1
+Width = 1920
+Height = 1072
+Filename = /home/hwadong/catkin_ws/src/lwr_gbz/Video/LfD_top.ogv
+FPS = 15.000000
+NoSound = 0
+Frequency = 22050
+Channels = 1
+BufferSize = 4096
+SoundFrameSize = 2
+PeriodSize = 1365
+UsedJack = 0
+v_bitrate = 0
+v_quality = 63
+s_quality = 10
+ZeroCompression = 1
