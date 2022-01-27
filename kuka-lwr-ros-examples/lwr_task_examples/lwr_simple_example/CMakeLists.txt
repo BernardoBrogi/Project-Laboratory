@@ -42,8 +42,8 @@ link_directories(
 
 add_library(${PROJECT_NAME} ${SRC_DIR}/simple_actions/linear_cart_action.cpp
                             ${INCLUDE_DIR}/simple_actions/linear_cart_action.h
-                            ${SRC_DIR}/simple_actions/LfD.cpp
-                            ${INCLUDE_DIR}/simple_actions/LfD.h
+                            ${SRC_DIR}/simple_actions/LfD_record.cpp
+                            ${INCLUDE_DIR}/simple_actions/LfD_record.h
 							${SRC_DIR}/simple_actions/LfD_replay.cpp
                             ${INCLUDE_DIR}/simple_actions/LfD_replay.h
 							${SRC_DIR}/simple_actions/LfD_dmp.cpp
