@@ -87,8 +87,8 @@ Now if you execute the command
 $ Cmd> Record
 ```
 
-you will be able for 10 seconds to control the robot with the haptic device and record the trajectory of the end effector. The data will be saved in the file data.txt.
-The end effector positions are taken 100 times per second.
+you will be able for 10 seconds to control the robot with the haptic device and record the trajectory of the end effector. The positions commanded to the robot will be saved in the file data/data_comm.txt. The real positions of the end effector are saved in the file data/data_mes.txt
+The end effector positions are taken 500 times per second.
 
 Now if you go_home again (you may need to execute the command twice) and execute the command
 
@@ -100,7 +100,7 @@ the robot will replay the trajectory recorded.
 
 ### Exploit the trajectory recorded to LfD and execute another trajectory with the same shape
 
-Here we assume there is a trajectory recorded in the file data.txt. To plan and execute a new trajectory based on the shape of the other run in another terminal
+Here we assume there is a trajectory recorded in the file data_mes.txt. To plan and execute a new trajectory based on the shape of the other run in another terminal
 
 ```
 $ roslaunch dmp dmp.launch
@@ -114,7 +114,7 @@ Running in another terminal
 $ rosrun dmp LfD.py
 ```
 
-will create a new trajectory based on the other one with the goal given. It will be saved it in the file plan.txt.
+will create a new trajectory based on the other one with the goal given. It will be saved it in the file data/plan.txt.
 
 if you go_home and then write in the console
 
@@ -126,9 +126,7 @@ the robot will execute the new trajectory.
 
 ## How to use (real robot)
 
-TO DO
-
-TO ADD
+This package had compatibility issues with our robot so we couldn't use this package to run the real robot.
 
 In order to set the connection with the real robot, follow the instructions for the [Network Setup](https://github.com/epfl-lasa/kuka-lwr-ros/wiki/Network-setup) here. Then type:
 ```
@@ -139,6 +137,6 @@ insert the password and then run the command:
 $ route add -net 192.168.0.20 netmask 255.255.255.255 gw 192.168.0.100 dev enp4s0
 ```
 to add a static route to a single host. 
-If the network results unreachable
+If the network results unreachable you may need to check the connections setting of your computer.
 
 
