@@ -47,7 +47,7 @@ $ roslaunch lwr_simple_example console.launch
 This is the console from which we can command the robot.
 All the functionalities of the EPFL package work.
 
-For istance writing the command
+For instance, writing the command
 
 ```
 $ Cmd> go_home
