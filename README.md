@@ -7,13 +7,20 @@ This package is a modified version of the [KUKA LWR EPFL package robot lasa](htt
 Some compatibility issues of that package are solved, and we also added other funtionalities to the package.
 Moreover, the [DMP package](https://github.com/sniekum/dmp) is added to Learn from Demonstration.
 
-The actual functionalities we implemented in our package are the following:
+The actual functionalities we implemented in this package are the following:
 
 
 * Move the robot with an Haptic Device
 * Record the trajectory of the end effector
 * Replay the trajectory
 * Using DMPs to Learn from Demonstration and replay the shape of the trajectory recorded changing initial position and goal of the trajectory recorded 
+
+### Structure of the package
+
+* The folder [dmp-master](dmp-master/) contains the [DMP package](https://github.com/sniekum/dmp) of Scott Niekum. Here we added the script "LfD.py" in order to generate a new plan trajectory from a recorded one.
+* The folders "fri-library-ros", "kuka-lwr-ros-examples", "kuka-lwr-ros", "passive-ds-control" were all part of the [KUKA LWR EPFL package robot lasa](https://github.com/epfl-lasa/kuka-lwr-ros). In particular, in the package "kuka-lwr-ros-examples/lwr_task_examples/[lwr_simple_example](kuka-lwr-ros-examples/lwr_task_examples/lwr_simple_example/)" we implemented all the scripts to move the robot with the haptic device, record and replay a trajectory and execute a trajectory with a new goal.
+* The folder [data](data/) contains the txt files where our package reads and writes trajectory executed. Further we implemented some simple matlab filesto plot the trajectories commanded to, or executed by, the robot.
+* The folder [video](video/) contains some examples videos of the robot in simulation performing different tasks.
 
 
 ## How to use (simulation)
