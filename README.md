@@ -47,7 +47,7 @@ $ roslaunch lwr_simple_example console.launch
 This is the console from which we can command the robot.
 All the functionalities of the EPFL package work.
 In the following picture is shown how the environment has to be set up.
-[Alt text](Images/environment.png "Environment set up")
+![Alt text](Images/environment.png "Environment set up")
 
 For instance, writing the command
 
