@@ -62,7 +62,7 @@ It's always recommended to run this command at the beginning and after every oth
 
 #### Haptic Device setup
 
-The haptic device we worked with is the Omega3. You may need to adjust the path to the libraries of the haptic device in the CMakelist.txt.
+The haptic device we worked with is the [omega.3](https://www.forcedimension.com/images/doc/specsheet_-_omega3.pdf). You may need to adjust the path to the libraries of the haptic device in the CMakelist.txt.
 You may also need to give the permission to the port where the haptic device is inserted. To do this type in a terminal
 
 ```
