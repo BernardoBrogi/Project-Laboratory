@@ -8,7 +8,7 @@
 #include "simple_actions/LfD_record.h"
 #include "simple_actions/LfD_replay.h"
 #include "simple_actions/LfD_dmp.h"
-
+#include "simple_actions/Collaborate.h"
 /**
   *     Client Action node (simple example)
   *
@@ -115,10 +115,15 @@ int main(int argc, char** argv)
     LfD_replay_action.b_position= true;//set true if it is pos,otherwise is velocity.
     actions["Replay"]         = &LfD_replay_action;
 
+    simple_actions::Collaborate_action Collaborate_action(nh);
+    Collaborate_action.b_position= true;//set true if it is pos,otherwise is velocity.
+    actions["Collaborate"]         = &Collaborate_action;
+
 	simple_actions::LfD_dmp_action LfD_dmp_action(nh);
     LfD_dmp_action.b_position= true;//set true if it is pos,otherwise is velocity.
     actions["LfD"]         = &LfD_dmp_action;
 	
+
 
     /**
       * Here we register all the goals with the action client. This wil make them available to

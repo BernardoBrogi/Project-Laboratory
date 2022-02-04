@@ -18,8 +18,8 @@ int main(int argc, char** argv)
     client_console.AddConsoleCommand("candle");
     client_console.AddConsoleCommand("Record");
     client_console.AddConsoleCommand("Replay");
+    client_console.AddConsoleCommand("Collaborate");
     client_console.AddConsoleCommand("LfD");
-
 
     client_console.start();
 

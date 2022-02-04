@@ -46,8 +46,10 @@ add_library(${PROJECT_NAME} ${SRC_DIR}/simple_actions/linear_cart_action.cpp
                             ${INCLUDE_DIR}/simple_actions/LfD_record.h
 							${SRC_DIR}/simple_actions/LfD_replay.cpp
                             ${INCLUDE_DIR}/simple_actions/LfD_replay.h
-							${SRC_DIR}/simple_actions/LfD_dmp.cpp
+                            ${SRC_DIR}/simple_actions/LfD_dmp.cpp
                             ${INCLUDE_DIR}/simple_actions/LfD_dmp.h
+                            ${SRC_DIR}/simple_actions/Collaborate.cpp
+                            ${INCLUDE_DIR}/simple_actions/Collaborate.h
 
         )
 ign_import_target(UUID)
@@ -66,6 +68,8 @@ target_link_libraries(client_console_node  ${catkin_LIBRARIES}
 
 add_executable(client_action_node  ${SRC_DIR}/client_action_node.cpp	)
 target_link_libraries(client_action_node  ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+
 
 
 
