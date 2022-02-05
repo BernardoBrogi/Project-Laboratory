@@ -14,7 +14,7 @@ The actual functionalities we implemented in this package are the following:
 * Record the trajectory of the end effector
 * Replay the trajectory
 * Using DMPs to Learn from Demonstration and replay the shape of the trajectory recorded changing initial position and goal of the trajectory recorded 
-* Implementation of a simple collaborative task (under development) "[lwr simple example](kuka-lwr-ros-examples/lwr_task_examples/lwr_simple_example/)" 
+* Implementation of a simple collaborative task (under development) [lwr simple example](kuka-lwr-ros-examples/lwr_task_examples/lwr_simple_example/)
 
 ### Structure of the package
 
