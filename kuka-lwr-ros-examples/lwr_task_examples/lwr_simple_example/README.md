@@ -30,7 +30,7 @@ Try to select the stick in gazebo and right click it to apply forces, at x=0  y=
 
 ## Current progress
 It is implemented by sensing the force vector F with the force sensor between lwr_6_link and lwr_7_link(2 link with a fixed joint will be convert to one link, you still get the force vector because of fixed link). The program will get the current position p first and set the target position p*, with the relationship:
-$$p*=p+k\cdot F$$
+$p*=p+k\cdot F$
 It is not perfectly moving exactly according to F vector but rotate a little at every time, this could because it is very offen that p* has been updated, even if it does not reach the target, It might can be solved by using PI control law. But in real human will eliminate this error automatically(human will adjust so the little error with the direction does not affect it)
 
 ##Structure of the project
